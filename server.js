@@ -31,6 +31,7 @@ const mongoConnection = () => {
 var template = path.join(__dirname, "templates/emails", "demo");
 var email = new Email({ views: { root: template } });
 var locals = { email: "myemail@gmail.com", username: "CompaCode" };
+const port = process.env.PORT || 5000
 
 const app = express();
 app.use(bodyParser.json());
@@ -121,8 +122,8 @@ app.use("/", (req, res, next) =>
 mongoConnection()
   .then((result) => {
     // mongoConnection.User.createIndex({ userId: 1 }, { unique: true });
-    app.listen(5000, () => {
-      console.log(`server starting on port: ${5000}`);
+    app.listen(port, () => {
+      console.log(`server starting on port: ${port}`);
     });
   })
   .catch((error) => console.log("Mongo connection error", error));
